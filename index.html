@@ -2151,6 +2151,166 @@ End image carousel -->
 <!-- End youtube video -->
 
 
+<!-- Youtube video -->
+<section class="hero is-small is-light">
+   <div class="hero-body">
+     <div class="container">
+       <!--Paper video. -->
+       <h2 class="title is-3">SOP: CRStats Light Web Application</h2>
+       <div class="columns is-centered has-text-centered">
+         <div class="column is-four-fifths">
+
+            <header style="border-bottom: 2px solid #0056b3; padding-bottom: 10px; margin-bottom: 20px; text-align: center;">
+               <h1 style="color: #0056b3; margin: 0;">Standard Operating Procedure (SOP)</h1>
+               <div style="margin-top: 15px; background-color: #eef; padding: 10px; border-radius: 5px; display: grid; grid-template-columns: 1fr 2fr; gap: 5px; text-align: left;">
+                   <strong style="color: #0056b3;">Title:</strong>         <span>Concentration-Response Analysis using the CRStats Light Web Application</span>
+                   <strong style="color: #0056b3;">Version:</strong>       <span>2.0.4</span>
+               </div>
+           </header>
+       
+           <h2 style="color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px;">1.0 Purpose</h2>
+           <p>This document provides a step-by-step guide for using the CRStats Light web application to perform concentration-response analysis. The procedure covers data preparation, uploading data, defining analysis parameters, generating curves, and interpreting the results, specifically the "Threshold of Interest" (THR) which corresponds to benchmark concentrations (BMC) or IC-values (e.g., IC50).</p>
+       
+           <h2 style="color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px;">2.0 Scope</h2>
+           <p>This SOP applies to all research personnel ("Working Life Scientists") who need to analyze experimental data to determine the concentration at which a substance produces a specific level of response.</p>
+       
+           <h2 style="color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px;">3.0 Prerequisites & Data Preparation</h2>
+           <h3 style="color: #555; margin-top: 25px;">3.1. Software/Hardware Requirements:</h3>
+           <ul style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">A computer with an internet connection.</li>
+               <li style="margin-bottom: 10px;">A modern web browser (e.g., Chrome, Firefox, Edge).</li>
+           </ul>
+       
+           <h3 style="color: #555; margin-top: 25px;">3.2. Data File Format:</h3>
+           <ul style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">Data must be in Microsoft Excel (<span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">.xlsx</span>) format.</li>
+               <li style="margin-bottom: 10px;">For pooling results from multiple independent experiments, it is recommended to have each experiment in a separate Excel file.</li>
+               <li style="margin-bottom: 10px;">The data within each Excel file must be structured as follows:
+                   <ul style="padding-left: 20px;">
+                       <li style="margin-bottom: 10px;"><strong>Column A:</strong> <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Conditions / Concentrations</span>. This column must contain numerical concentration values and text identifiers for controls, such as <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Solvent control (SC)</span>.</li>
+                       <li style="margin-bottom: 10px;"><strong>Column B, C, etc.:</strong> Each subsequent column should represent an experimental endpoint (e.g., <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Endpoint A</span>, <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Endpoint B</span>) and contain the measured raw response values.</li>
+                   </ul>
+               </li>
+           </ul>
+           <p><strong>Example Data Structure (from <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Experiment_1.xlsx</span>):</strong></p>
+           <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+               <thead>
+                   <tr>
+                       <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2; font-weight: bold;"></th>
+                       <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2; font-weight: bold;">A</th>
+                       <th style="border: 1px solid #ddd; padding: 8px; text-align: left; background-color: #f2f2f2; font-weight: bold;">B</th>
+                   </tr>
+               </thead>
+               <tbody>
+                   <tr>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><strong>1</strong></td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><strong>Conditions / Concentrations</strong></td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><strong>Endpoint A</strong></td>
+                   </tr>
+                   <tr>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><strong>2</strong></td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Solvent control (SC)</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">26166.35921</td>
+                   </tr>
+                   <tr>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><strong>3</strong></td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">Solvent control (SC)</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">24993.22365</td>
+                   </tr>
+                   <tr>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">...</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">...</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">...</td>
+                   </tr>
+                   <tr>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;"><strong>8</strong></td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">0.045724737</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">25152.39803</td>
+                   </tr>
+                    <tr>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">...</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">...</td>
+                       <td style="border: 1px solid #ddd; padding: 8px; text-align: left;">...</td>
+                   </tr>
+               </tbody>
+           </table>
+       
+           <h2 style="color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px;">4.0 Procedure: Step-by-Step Instructions</h2>
+           <h3 style="color: #555; margin-top: 25px;">4.1. Accessing the Application</h3>
+           <ol style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">Navigate to the CRStats project homepage using your web browser.</li>
+               <li style="margin-bottom: 10px;">Locate and click the central button labeled <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">ShinyApp</span> to launch the analysis tool.</li>
+           </ol>
+       
+           <h3 style="color: #555; margin-top: 25px;">4.2. Uploading and Analyzing the First Dataset</h3>
+           <ol style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">Once the CRStats Light application loads, click the <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">↑ Upload</span> button.</li>
+               <li style="margin-bottom: 10px;">A file selection dialog will open. Navigate to your data folder and select all experimental files to be pooled (e.g., <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Experiment_1.xlsx</span>, <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Experiment_2.xlsx</span>, <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Experiment_3.xlsx</span>). Click <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Open</span>.</li>
+               <li style="margin-bottom: 10px;">The application will load the data and display data definition fields.</li>
+           </ol>
+       
+           <h3 style="color: #555; margin-top: 25px;">4.3. Defining the First Endpoint (e.g., Endpoint A)</h3>
+           <ol style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;"><strong>Name:</strong> In the "Name" field, enter a descriptive name (e.g., <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Endpoint A</span>).</li>
+               <li style="margin-bottom: 10px;"><strong>Endpoint:</strong> From the dropdown, select the response data column (e.g., <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">endpoint a</span>).</li>
+               <li style="margin-bottom: 10px;"><strong>X-axis:</strong> Select the column with concentration values from the dropdown.</li>
+               <li style="margin-bottom: 10px;"><strong>Threshold of Interest (THR):</strong> Enter the desired response threshold percentage. For an IC50, this is <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">50</span>.</li>
+               <li style="margin-bottom: 10px;"><strong>Normalization & Pooling:</strong>
+                   <ul style="padding-left: 20px;">
+                       <li style="margin-bottom: 10px;">Ensure the <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Intra-Experiment pooling</span> checkbox is ticked.</li>
+                       <li style="margin-bottom: 10px;">Under "Multiplicative / (Dynamic) range normalization", set the <strong>Min</strong> dropdown to <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">solvent control (sc)</span>. This sets the 100% response baseline.</li>
+                   </ul>
+               </li>
+               <li style="margin-bottom: 10px;">Click the <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Add data</span> button at the bottom of the panel.</li>
+               <li style="margin-bottom: 10px;">A <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Loading...</span> indicator will appear while the data is processed.</li>
+           </ol>
+       
+           <h3 style="color: #555; margin-top: 25px;">4.4. Reviewing the First Result</h3>
+           <ul style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">A plot and results summary will appear on the left side of the screen.</li>
+               <li style="margin-bottom: 10px;"><strong>Plot:</strong> A concentration-response curve with data points and a fitted model.</li>
+               <li style="margin-bottom: 10px;"><strong>Results Summary:</strong> Key statistics for "Endpoint A" will be displayed below the plot.</li>
+           </ul>
+       
+           <h3 style="color: #555; margin-top: 25px;">4.5. Adding and Analyzing a Second Dataset (Overlay)</h3>
+           <ol style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">To add another endpoint for comparison, click the <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Add data</span> button again.</li>
+               <li style="margin-bottom: 10px;">A new set of configuration fields will appear.</li>
+               <li style="margin-bottom: 10px;"><strong>Name:</strong> Change the "Name" field to a new identifier (e.g., <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Endpoint B</span>).</li>
+               <li style="margin-bottom: 10px;"><strong>Endpoint:</strong> From the dropdown, select the next data column (e.g., <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">endpoint b</span>).</li>
+               <li style="margin-bottom: 10px;">Verify that other settings (X-axis, THR, Normalization) are correct for the comparison.</li>
+               <li style="margin-bottom: 10px;">Click the <span style="background-color: #e9e9e9; padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; border: 1px solid #ccc;">Add data</span> button again.</li>
+           </ol>
+       
+           <h3 style="color: #555; margin-top: 25px;">4.6. Reviewing the Combined Results</h3>
+           <ul style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;">The plot will update to show both curves overlaid, with a legend identifying each endpoint.</li>
+               <li style="margin-bottom: 10px;">A second summary box for "Endpoint B" will appear, allowing for direct comparison of the statistical outputs.</li>
+           </ul>
+       
+           <h2 style="color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px;">5.0 Interpreting the Output</h2>
+           <p>For each endpoint, a summary box provides the following information:</p>
+           <ul style="padding-left: 20px;">
+               <li style="margin-bottom: 10px;"><strong>Model:</strong> The statistical model that best fits the data (e.g., `Weibull (type 1)`).</li>
+               <li style="margin-bottom: 10px;"><strong>Model abbr.:</strong> An abbreviation for the model.</li>
+               <li style="margin-bottom: 10px;"><strong>AIC:</strong> The Akaike Information Criterion (lower values indicate a better fit).</li>
+               <li style="margin-bottom: 10px;"><strong>THR:</strong> The "Threshold of Interest" you defined (e.g., 50).</li>
+               <li style="margin-bottom: 10px;"><strong>THR reach estimate:</strong> This is the primary result, showing the calculated concentration to reach the threshold, with the 95% confidence interval.</li>
+           </ul>
+           <div style="background-color: #ffffe0; border-left: 4px solid #f0ad4e; padding: 15px; margin-top: 15px; border-radius: 4px;">
+               <strong>Example:</strong>
+               <p><code style="font-weight: bold; color: #c7254e;">THR reach estimate: 1.657 ϵ (1.531, 1.787)</code></p>
+               This means the estimated concentration to achieve a 50% response is <strong>1.657 µM</strong>, with 95% confidence that the true value lies between 1.531 µM and 1.787 µM.
+           </div>            
+
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
+ <!-- End youtube video -->
+ 
+
 <!-- Video carousel
 <section class="hero is-small">
   <div class="hero-body">
